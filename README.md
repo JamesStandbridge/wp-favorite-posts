@@ -17,7 +17,7 @@ WP Favorite Posts is a WordPress plugin that allows users to mark custom post ty
 1. Download or clone the repository into your `wp-content/plugins/` directory:
 
 ```bash
-git clone https://github.com/yourusername/wp-favorite-posts.git
+git clone https://github.com/JamesStandbridge/wp-favorite-posts
 ```
 
 2.  Activate the plugin through the 'Plugins' menu in WordPress.
