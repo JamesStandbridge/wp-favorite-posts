@@ -10,7 +10,7 @@
  *
  * @package WP_Favorite_Posts
  * @since 1.0.0
- * @version 1.6
+ * @version 1.7
  * @author James Standbridge
  * @link https://github.com/JamesStandbridge
  */
