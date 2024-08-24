@@ -1,10 +1,18 @@
 <?php
 /*
 Plugin Name: WP Favorite Posts
-Description: A plugin to add favorite functionality for custom post types.
+Plugin URI: https://github.com/jamesstandbridge/wp-favorite-posts
+Description: WP Favorite Posts is a WordPress plugin that allows users to mark custom post types (CPT) as favorites and view a paginated list of their favorites.
 Version: 1.2
-Author: James Standbridge (https://github.com/jamesstandbridge)
+Author: James Standbridge
+Author URI: https://github.com/jamesstandbridge
 Text Domain: wp-favorite-posts
+Domain Path: /languages
+Network: true
+Requires at least: 4.0
+Requires PHP: 7.4
+License: MIT
+License URI: https://opensource.org/licenses/MIT
 */
 
 // Prevent direct access
