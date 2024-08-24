@@ -2,6 +2,29 @@
 
 WP Favorite Posts is a WordPress plugin that allows users to mark custom post types (CPT) as favorites and view a paginated list of their favorites.
 
+## Tested up to
+
+Tested up to: 6.6.1
+
+## Stable Tag
+
+Stable Tag: 1.7
+
+## License
+
+This plugin is licensed under the MIT License.
+
+However, to ensure compatibility with the WordPress Plugin Repository guidelines, this plugin is also GPLv2 (or later) compatible.
+
+**MIT License**: See the LICENSE file for the full text.
+
+**GPLv2 or later**:
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program; if not, see [http://www.gnu.org/licenses/](http://www.gnu.org/licenses/).
+
 ## Features
 
 - Add any custom post type to favorites.
