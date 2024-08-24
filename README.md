@@ -89,10 +89,6 @@ Use the `[favorite_posts]` shortcode to display a paginated list of the user's f
 
 Display a list of favorite posts for a custom post type "recettes" with 10 posts per page, using a `<div>` container styled as a grid:
 
-php
-
-Copier le code
-
 ```php
 [favorite_posts
     post_type="recettes"
