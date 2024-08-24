@@ -1,8 +1,15 @@
+
+
+
 .favorite-button {
+    background-color: #0073aa;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    color: #0073aa;
 }
 
 .favorite-button:hover {
-    color: #005177;
+    background-color: #005177;
 }

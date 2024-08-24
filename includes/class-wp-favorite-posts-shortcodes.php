@@ -6,6 +6,27 @@ class WP_Favorite_Posts_Shortcodes
     public static function init()
     {
         add_shortcode('favorite_posts', array(__CLASS__, 'favorite_posts_shortcode'));
+        add_shortcode('favorite_button', array(__CLASS__, 'favorite_button_shortcode'));
+    }
+
+    public static function favorite_button_shortcode($atts)
+    {
+        if (! is_user_logged_in()) {
+            return "";
+        }
+
+        $atts = shortcode_atts(array(
+            'post_id' => get_the_ID(),
+            'class' => 'favorite-button'
+        ), $atts, 'favorite_button');
+
+        $post_id = intval($atts['post_id']);
+        $user_id = get_current_user_id();
+        $favorites = get_user_meta($user_id, '_wp_favorite_posts', true);
+
+        $button_text = in_array($post_id, (array) $favorites) ? 'Retirer des favoris' : 'Ajouter aux favoris';
+
+        return '<button class="' . esc_attr($atts['class']) . '" data-post-id="' . esc_attr($post_id) . '">' . esc_html($button_text) . '</button>';
     }
 
     public static function favorite_posts_shortcode($atts)
