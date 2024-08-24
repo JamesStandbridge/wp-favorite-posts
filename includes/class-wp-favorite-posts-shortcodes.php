@@ -54,8 +54,8 @@ class WP_Favorite_Posts_Shortcodes
         $atts = shortcode_atts(array(
             'post_type' => 'post',
             'posts_per_page' => 10,
-            'next_text' => 'Next', // Text for the next button
-            'prev_text' => 'Previous', // Text for the previous button
+            'next_text' => 'Next',
+            'prev_text' => 'Previous',
         ), $atts, 'favorite_posts');
 
         if (!is_user_logged_in()) {
@@ -93,7 +93,19 @@ class WP_Favorite_Posts_Shortcodes
         if ($query->have_posts()) {
             echo '<ul class="favorite-posts">';
             while ($query->have_posts()) : $query->the_post();
-                echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+
+                // Path to the custom template in the active theme
+                $template_name = 'favorite-' . $post_type . '-item.php';
+                $template_path = locate_template($template_name);
+
+                if ($template_path) {
+                    // Use the custom template if it exists
+                    include($template_path);
+                } else {
+                    // Default output if no custom template exists
+                    echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                }
+
             endwhile;
             echo '</ul>';
 
