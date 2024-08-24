@@ -1,4 +1,4 @@
-``# WP Favorite Posts
+# WP Favorite Posts
 
 WP Favorite Posts is a WordPress plugin that allows users to mark custom post types (CPT) as favorites and view a paginated list of their favorites.
 
