@@ -54,6 +54,9 @@ class WP_Favorite_Posts_Shortcodes
         $atts = shortcode_atts(array(
             'post_type' => 'post',
             'posts_per_page' => 10,
+            'container_tag' => 'ul',  // The tag for the container (ul, div, section, etc.)
+            'container_class' => 'favorite-posts',  // CSS class for the container
+            'item_class' => '',  // CSS class for each item
             'next_text' => 'Next',
             'prev_text' => 'Previous',
         ), $atts, 'favorite_posts');
@@ -66,13 +69,13 @@ class WP_Favorite_Posts_Shortcodes
         $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
         ob_start();
-        echo '<div id="favorite-posts-container" data-post-type="' . esc_attr($atts['post_type']) . '" data-posts-per-page="' . esc_attr($atts['posts_per_page']) . '">';
-        self::render_favorite_posts($user_id, $atts['post_type'], $atts['posts_per_page'], $paged, $atts['next_text'], $atts['prev_text']);
+        echo '<div id="favorite-posts-container" data-post-type="' . esc_attr($atts['post_type']) . '" data-posts-per-page="' . esc_attr($atts['posts_per_page']) . '" data-container-tag="' . esc_attr($atts['container_tag']) . '" data-container-class="' . esc_attr($atts['container_class']) . '" data-item-class="' . esc_attr($atts['item_class']) . '">';
+        self::render_favorite_posts($user_id, $atts['post_type'], $atts['posts_per_page'], $paged, $atts['container_tag'], $atts['container_class'], $atts['item_class'], $atts['next_text'], $atts['prev_text']);
         echo '</div>';
         return ob_get_clean();
     }
 
-    public static function render_favorite_posts($user_id, $post_type, $posts_per_page, $paged, $next_text, $prev_text)
+    public static function render_favorite_posts($user_id, $post_type, $posts_per_page, $paged, $container_tag, $container_class, $item_class, $next_text, $prev_text)
     {
         $favorites = get_user_meta($user_id, '_wp_favorite_posts', true);
 
@@ -91,23 +94,27 @@ class WP_Favorite_Posts_Shortcodes
         $query = new WP_Query($args);
 
         if ($query->have_posts()) {
-            echo '<ul class="favorite-posts">';
+            echo '<' . esc_html($container_tag) . ' class="' . esc_attr($container_class) . '">';
             while ($query->have_posts()) : $query->the_post();
 
                 // Path to the custom template in the active theme
                 $template_name = 'favorite-' . $post_type . '-item.php';
                 $template_path = locate_template($template_name);
 
+                echo '<div class="' . esc_attr($item_class) . '">'; // Start item container
+
                 if ($template_path) {
                     // Use the custom template if it exists
                     include($template_path);
                 } else {
                     // Default output if no custom template exists
-                    echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                    echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
                 }
 
+                echo '</div>'; // End item container
+
             endwhile;
-            echo '</ul>';
+            echo '</' . esc_html($container_tag) . '>';
 
             $total_pages = $query->max_num_pages;
 
