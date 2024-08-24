@@ -1,0 +1,8 @@
+.favorite-button {
+    cursor: pointer;
+    color: #0073aa;
+}
+
+.favorite-button:hover {
+    color: #005177;
+}
