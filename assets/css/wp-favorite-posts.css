@@ -62,3 +62,38 @@
 .favorite-button:hover {
     background-color: #005177;
 }
+
+/**
+
+QUERY POST
+
+*/
+
+.favorite-posts {
+    list-style: none;
+    padding-left: 0;
+}
+
+.favorite-posts li {
+    margin-bottom: 10px;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.favorite-pagination-btn {
+    background-color: #0073aa;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.favorite-pagination-btn:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}

@@ -54,30 +54,42 @@ class WP_Favorite_Posts_Shortcodes
         $atts = shortcode_atts(array(
             'post_type' => 'post',
             'posts_per_page' => 10,
+            'next_text' => 'Next', // Text for the next button
+            'prev_text' => 'Previous', // Text for the previous button
         ), $atts, 'favorite_posts');
 
-        if (! is_user_logged_in()) {
+        if (!is_user_logged_in()) {
             return '<p>You must be logged in to view your favorite posts.</p>';
         }
 
-        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
         $user_id = get_current_user_id();
+        $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+
+        ob_start();
+        echo '<div id="favorite-posts-container" data-post-type="' . esc_attr($atts['post_type']) . '" data-posts-per-page="' . esc_attr($atts['posts_per_page']) . '">';
+        self::render_favorite_posts($user_id, $atts['post_type'], $atts['posts_per_page'], $paged, $atts['next_text'], $atts['prev_text']);
+        echo '</div>';
+        return ob_get_clean();
+    }
+
+    public static function render_favorite_posts($user_id, $post_type, $posts_per_page, $paged, $next_text, $prev_text)
+    {
         $favorites = get_user_meta($user_id, '_wp_favorite_posts', true);
 
         if (empty($favorites)) {
-            return '<p>You have no favorite posts.</p>';
+            echo '<p>You have no favorite posts.</p>';
+            return;
         }
 
         $args = array(
-            'post_type' => $atts['post_type'],
-            'posts_per_page' => $atts['posts_per_page'],
+            'post_type' => $post_type,
+            'posts_per_page' => $posts_per_page,
             'post__in' => $favorites,
             'paged' => $paged,
         );
 
         $query = new WP_Query($args);
 
-        ob_start();
         if ($query->have_posts()) {
             echo '<ul class="favorite-posts">';
             while ($query->have_posts()) : $query->the_post();
@@ -85,19 +97,23 @@ class WP_Favorite_Posts_Shortcodes
             endwhile;
             echo '</ul>';
 
-            $big = 999999999; // need an unlikely integer
-            echo paginate_links(array(
-                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                'format' => '?paged=%#%',
-                'current' => max(1, $paged),
-                'total' => $query->max_num_pages
-            ));
+            $total_pages = $query->max_num_pages;
+
+            if ($total_pages > 1) {
+                echo '<div class="pagination-buttons">';
+                if ($paged > 1) {
+                    echo '<button class="favorite-pagination-btn" data-paged="' . ($paged - 1) . '">' . esc_html($prev_text) . '</button>';
+                }
+                if ($paged < $total_pages) {
+                    echo '<button class="favorite-pagination-btn" data-paged="' . ($paged + 1) . '">' . esc_html($next_text) . '</button>';
+                }
+                echo '</div>';
+            }
         } else {
             echo '<p>No favorite posts found.</p>';
         }
-        wp_reset_postdata();
 
-        return ob_get_clean();
+        wp_reset_postdata();
     }
 }
 

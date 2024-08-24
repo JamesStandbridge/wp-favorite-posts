@@ -1,4 +1,32 @@
 jQuery(document).ready(function($) {
+    // Handle pagination buttons
+    $(document).on('click', '.favorite-pagination-btn', function(e) {
+        e.preventDefault();
+
+        var $button = $(this);
+        var paged = $button.data('paged');
+        var $container = $('#favorite-posts-container');
+        var post_type = $container.data('post-type');
+        var posts_per_page = $container.data('posts-per-page');
+
+        $.ajax({
+            type: 'POST',
+            url: wpfp_ajax.ajax_url,
+            data: {
+                action: 'load_favorite_posts',
+                paged: paged,
+                post_type: post_type,
+                posts_per_page: posts_per_page,
+            },
+            success: function(response) {
+                if (response.success) {
+                    $container.html(response.data.content);
+                }
+            }
+        });
+    });
+
+    // Existing code for favorite button functionality
     $('.favorite-button').on('click', function(e) {
         e.preventDefault();
 
