@@ -1,4 +1,4 @@
-# WP Favorite Posts
+``# WP Favorite Posts
 
 WP Favorite Posts is a WordPress plugin that allows users to mark custom post types (CPT) as favorites and view a paginated list of their favorites.
 
@@ -11,6 +11,7 @@ WP Favorite Posts is a WordPress plugin that allows users to mark custom post ty
 - Customizable favorite button with text, icons (image or SVG), or both.
 - Button state updates dynamically without page reload.
 - Disabled button with a loading spinner during AJAX requests.
+- Flexible display options for favorite lists (list, grid, etc.).
 
 ## Installation
 
@@ -78,18 +79,34 @@ Use the `[favorite_posts]` shortcode to display a paginated list of the user's f
 
 - `post_type`: The custom post type you want to display favorites for (default: "post").
 - `posts_per_page`: Number of posts to display per page (default: 10).
+- `container_tag`: The HTML tag to use for the container of the favorite posts list (default: "ul").
+- `container_class`: CSS class to apply to the container (optional).
+- `item_class`: CSS class to apply to each item in the list (optional).
+- `next_text`: Text to display on the "Next" pagination button (default: "Next").
+- `prev_text`: Text to display on the "Previous" pagination button (default: "Previous").
 
 **Example usage:**
 
-Display a list of favorite posts for a custom post type "recettes" with 10 posts per page:
+Display a list of favorite posts for a custom post type "recettes" with 10 posts per page, using a `<div>` container styled as a grid:
+
+php
+
+Copier le code
 
 ```php
-[favorite_posts post_type="recettes" posts_per_page="10"]
+[favorite_posts
+    post_type="recettes"
+    posts_per_page="10"
+    container_tag="div"
+    container_class="favorite-recipes-grid"
+    item_class="favorite-recipe-grid-item"
+    next_text="Suivant"
+    prev_text="Précédent"]
 ```
 
-## Customization
+### Customization
 
-### Styling the Favorite Button
+#### Styling the Favorite Button
 
 You can add custom styles to the favorite button using the `class` attribute or by modifying the styles in your theme's `style.css`. The button includes different states for when it is active or inactive, as well as a loading spinner during AJAX requests.
 
@@ -135,3 +152,11 @@ You can add custom styles to the favorite button using the `class` attribute or 
 ### JavaScript Interaction
 
 The favorite button automatically disables itself and displays a loading spinner during the AJAX request to prevent multiple submissions. The button's text and icon will update dynamically based on the current favorite status of the post.
+
+### Customizing the Favorites List
+
+You can create custom templates for how each post in the favorites list is displayed by creating a template file in your theme with the name `favorite-{post_type}-item.php`. This allows you to fully customize the display of each favorite post for different custom post types.
+
+For example, to customize the display for the `recettes` post type, create a file named `favorite-recettes-item.php` in your theme, and use it to control the HTML and PHP output for each favorite item.
+
+This approach provides flexibility in designing the favorite lists, allowing you to adapt the presentation to your site's specific needs.
