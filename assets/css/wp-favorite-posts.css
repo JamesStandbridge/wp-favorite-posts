@@ -1,3 +1,9 @@
+/**
+    DEFAULT CSS wp-favorite-posts
+
+    @author: James Standbridge
+*/
+
 .favorite-button {
     background-color: #0073aa;
     color: white;
@@ -7,7 +13,7 @@
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 5px; /* Adjust the gap between icon and text */
+    gap: 5px;
     position: relative;
 }
 
@@ -27,7 +33,6 @@
     margin-left: 10px;
 }
 
-/* Animation for the spinner */
 @keyframes spinner-border {
     100% {
         transform: rotate(360deg);

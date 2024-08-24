@@ -1,5 +1,28 @@
+
+/**
+ * WP Favorite Posts JavaScript
+ *
+ * This script handles the AJAX functionality for the WP Favorite Posts plugin, including
+ * pagination of the favorite posts list and toggling the favorite status of individual posts.
+ *
+ * @package WP_Favorite_Posts
+ * @since 1.0.0
+ * @version 1.6
+ * @author James Standbridge
+ * @link https://github.com/JamesStandbridge
+ */
 jQuery(document).ready(function($) {
-    // Handle pagination buttons
+
+    /**
+     * Handle pagination for the favorite posts list via AJAX.
+     *
+     * This event listener is attached to the pagination buttons within the favorite posts list.
+     * When a button is clicked, it triggers an AJAX request to load the next or previous set of
+     * favorite posts without reloading the page.
+     *
+     * @event click .favorite-pagination-btn
+     * @param {Object} e - The event object.
+     */
     $(document).on('click', '.favorite-pagination-btn', function(e) {
         e.preventDefault();
 
@@ -26,7 +49,17 @@ jQuery(document).ready(function($) {
         });
     });
 
-    // Existing code for favorite button functionality
+    /**
+     * Handle the toggling of a post's favorite status via AJAX.
+     *
+     * This event listener is attached to the favorite button. When the button is clicked, it sends
+     * an AJAX request to either add or remove the post from the user's favorites. The button's text
+     * and icon are updated based on the new favorite status, and a loading spinner is displayed while
+     * the request is being processed.
+     *
+     * @event click .favorite-button
+     * @param {Object} e - The event object.
+     */
     $('.favorite-button').on('click', function(e) {
         e.preventDefault();
 
