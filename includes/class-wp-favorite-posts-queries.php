@@ -3,7 +3,6 @@
 class WP_Favorite_Posts_Queries
 {
 
-    // Example function to retrieve favorite posts
     public static function get_user_favorites($user_id, $post_type = 'post', $number = 10, $paged = 1)
     {
         $favorites = get_user_meta($user_id, '_wp_favorite_posts', true);

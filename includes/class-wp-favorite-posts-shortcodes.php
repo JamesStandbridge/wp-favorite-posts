@@ -3,13 +3,11 @@
 class WP_Favorite_Posts_Shortcodes
 {
 
-    // Register shortcodes
     public static function init()
     {
         add_shortcode('favorite_posts', array(__CLASS__, 'favorite_posts_shortcode'));
     }
 
-    // Shortcode to display paginated favorite posts
     public static function favorite_posts_shortcode($atts)
     {
         $atts = shortcode_atts(array(
@@ -46,7 +44,6 @@ class WP_Favorite_Posts_Shortcodes
             endwhile;
             echo '</ul>';
 
-            // Pagination
             $big = 999999999; // need an unlikely integer
             echo paginate_links(array(
                 'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),

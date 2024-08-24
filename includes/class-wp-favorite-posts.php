@@ -3,7 +3,6 @@
 class WP_Favorite_Posts
 {
 
-    // Initialize the plugin
     public static function init()
     {
         add_action('wp_enqueue_scripts', array(__CLASS__, 'enqueue_scripts'));
@@ -11,7 +10,6 @@ class WP_Favorite_Posts
         add_action('wp_ajax_nopriv_toggle_favorite', array('WP_Favorite_Posts_Ajax', 'toggle_favorite'));
     }
 
-    // Enqueue scripts and styles
     public static function enqueue_scripts()
     {
         wp_enqueue_script('wp-favorite-posts', plugins_url('../assets/js/wp-favorite-posts.js', __FILE__), array('jquery'), '1.0', true);
