@@ -70,9 +70,24 @@ class WP_Favorite_Posts_Ajax
         $paged = intval($_POST['paged']);
         $post_type = sanitize_text_field($_POST['post_type']);
         $posts_per_page = intval($_POST['posts_per_page']);
+        $container_tag = isset($_POST['container_tag']) ? sanitize_text_field($_POST['container_tag']) : 'ul';
+        $container_class = isset($_POST['container_class']) ? sanitize_text_field($_POST['container_class']) : 'favorite-posts';
+        $item_class = isset($_POST['item_class']) ? sanitize_text_field($_POST['item_class']) : '';
+        $next_text = isset($_POST['next_text']) ? sanitize_text_field($_POST['next_text']) : 'Next';
+        $prev_text = isset($_POST['prev_text']) ? sanitize_text_field($_POST['prev_text']) : 'Previous';
 
         ob_start();
-        WP_Favorite_Posts_Shortcodes::render_favorite_posts($user_id, $post_type, $posts_per_page, $paged, 'Next', 'Previous');
+        WP_Favorite_Posts_Shortcodes::render_favorite_posts(
+            $user_id,
+            $post_type,
+            $posts_per_page,
+            $paged,
+            $container_tag,
+            $container_class,
+            $item_class,
+            $next_text,
+            $prev_text
+        );
         $content = ob_get_clean();
 
         wp_send_json_success(['content' => $content]);

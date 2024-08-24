@@ -31,6 +31,13 @@ jQuery(document).ready(function($) {
         var $container = $('#favorite-posts-container');
         var post_type = $container.data('post-type');
         var posts_per_page = $container.data('posts-per-page');
+        var container_tag = $container.data('container-tag');
+        var container_class = $container.data('container-class');
+        var item_class = $container.data('item-class');
+
+        // Disable the button and show the spinner
+        $button.prop('disabled', true);
+        $button.append('<span class="spinner-border pagination-spinner" role="status" aria-hidden="true"></span>');
 
         $.ajax({
             type: 'POST',
@@ -40,11 +47,24 @@ jQuery(document).ready(function($) {
                 paged: paged,
                 post_type: post_type,
                 posts_per_page: posts_per_page,
+                container_tag: container_tag,
+                container_class: container_class,
+                item_class: item_class,
             },
             success: function(response) {
                 if (response.success) {
                     $container.html(response.data.content);
+                } else {
+                    console.log('Error loading favorite posts:', response.data);
                 }
+            },
+            complete: function() {
+                // Re-enable the button and remove the spinner
+                $button.prop('disabled', false);
+                $button.find('.pagination-spinner').remove();
+            },
+            error: function(xhr, status, error) {
+                console.log('AJAX Error:', error);
             }
         });
     });
