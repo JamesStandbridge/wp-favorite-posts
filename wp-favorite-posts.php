@@ -2,8 +2,8 @@
 /*
 Plugin Name: WP Favorite Posts
 Description: A plugin to add favorite functionality for custom post types.
-Version: 1.0
-Author: James Standbridge {james.standbridge.git@gmail.com}
+Version: 1.2
+Author: James Standbridge (https://github.com/jamesstandbridge)
 Text Domain: wp-favorite-posts
 */
 
