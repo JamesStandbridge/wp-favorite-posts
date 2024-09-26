@@ -112,7 +112,6 @@ jQuery(document).ready(function($) {
 
         var $button = $(this);
         var post_id = $button.data('post-id');
-        var $listItem = $button.closest('li.favorite-recette-item');
         var $container = $('#favorite-posts-container');
         var paged = $container.data('paged') || 1;
         var post_type = $container.data('post-type');
@@ -135,15 +134,12 @@ jQuery(document).ready(function($) {
                 if (response.success) {
                     $(this).remove();
 
-                    // Après la suppression, vérifiez s'il y a encore des items dans la liste
                     if ($container.find('li.favorite-recette-item').length === 0 && paged > 1) {
-                        // Si la page est vide et qu'il y a des pages précédentes, on charge la page précédente
                         loadPage(paged - 1, post_type, posts_per_page, container_tag, container_class, item_class, function(content) {
                             $container.html(content);
-                            $container.data('paged', paged - 1); // Met à jour la page courante
+                            $container.data('paged', paged - 1); 
                         });
                     } else {
-                        // Sinon, on recharge simplement la page actuelle
                         loadPage(paged, post_type, posts_per_page, container_tag, container_class, item_class, function(content) {
                             $container.html(content);
                         });
