@@ -9,7 +9,7 @@
  *
  * @package WP_Favorite_Posts
  * @since 1.0.0
- * @version 1.7
+ * @version 1.8
  * @author James Standbridge
  * @link https://github.com/JamesStandbridge
  */
@@ -33,6 +33,9 @@ class WP_Favorite_Posts
 
         add_action('wp_ajax_load_favorite_posts', array('WP_Favorite_Posts_Ajax', 'load_favorite_posts'));
         add_action('wp_ajax_nopriv_load_favorite_posts', array('WP_Favorite_Posts_Ajax', 'load_favorite_posts'));
+
+        add_action('wp_ajax_remove_favorite', array('WP_Favorite_Posts_Ajax', 'remove_favorite'));
+        add_action('wp_ajax_nopriv_remove_favorite', array('WP_Favorite_Posts_Ajax', 'remove_favorite'));
     }
 
     /**

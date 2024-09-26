@@ -8,7 +8,7 @@ Tested up to: 6.6.1
 
 ## Stable Tag
 
-Stable Tag: 1.7
+Stable Tag: 1.8
 
 ## License
 
