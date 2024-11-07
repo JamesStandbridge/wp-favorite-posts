@@ -9,7 +9,7 @@
  * @package WP_Favorite_Posts
  * @since 1.0.0
  * @version 1.7
- * @author James Standbridge
+ * @autor James Standbridge
  * @link https://github.com/JamesStandbridge
  */
 class WP_Favorite_Posts_Shortcodes
@@ -98,12 +98,12 @@ class WP_Favorite_Posts_Shortcodes
             'container_tag' => 'ul',
             'container_class' => 'favorite-posts',
             'item_class' => '',
-            'next_text' => 'Next',
-            'prev_text' => 'Previous',
+            'next_text' => 'Suivant',
+            'prev_text' => 'Précédent',
         ), $atts, 'favorite_posts');
 
         if (!is_user_logged_in()) {
-            return '<p>You must be logged in to view your favorite posts.</p>';
+            return '<p>Vous devez être connecté pour voir vos favoris.</p>';
         }
 
         $user_id = get_current_user_id();
@@ -139,7 +139,7 @@ class WP_Favorite_Posts_Shortcodes
         $favorites = get_user_meta($user_id, '_wp_favorite_posts', true);
 
         if (empty($favorites)) {
-            echo '<p>You have no favorite posts.</p>';
+            echo '<p>Vous n\'avez pas de favoris.</p>';
             return;
         }
 
@@ -185,7 +185,7 @@ class WP_Favorite_Posts_Shortcodes
                 echo '</div>';
             }
         } else {
-            echo '<p>No favorite posts found.</p>';
+            echo '<p>Aucun favori trouvé.</p>';
         }
 
         wp_reset_postdata();
